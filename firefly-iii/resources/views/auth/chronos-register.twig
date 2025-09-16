@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar-se - CHRONOS Fin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --chronos-orange: #f54e1a;
+            --chronos-orange-light: #ff6b3d;
+            --chronos-dark: #1a1a1a;
+            --chronos-dark-secondary: #2d2d2d;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--chronos-orange), var(--chronos-orange-light));
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .chronos-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .chronos-logo h1 {
+            color: var(--chronos-orange);
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .chronos-logo p {
+            color: #666;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .form-floating {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            padding: 12px 16px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--chronos-orange);
+            box-shadow: 0 0 0 0.2rem rgba(245, 78, 26, 0.25);
+        }
+
+        .btn-chronos {
+            background: linear-gradient(135deg, var(--chronos-orange), var(--chronos-orange-light));
+            border: none;
+            border-radius: 12px;
+            padding: 15px 30px;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-chronos:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 78, 26, 0.4);
+            color: white;
+        }
+
+        .plan-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .plan-option {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .plan-option:hover {
+            border-color: var(--chronos-orange);
+            transform: translateY(-2px);
+        }
+
+        .plan-option.selected {
+            border-color: var(--chronos-orange);
+            background: rgba(245, 78, 26, 0.1);
+        }
+
+        .plan-option input[type="radio"] {
+            display: none;
+        }
+
+        .plan-title {
+            font-weight: 600;
+            color: var(--chronos-orange);
+            margin-bottom: 5px;
+        }
+
+        .plan-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .plan-features {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .subdomain-group {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .subdomain-group:focus-within {
+            border-color: var(--chronos-orange);
+            box-shadow: 0 0 0 0.2rem rgba(245, 78, 26, 0.25);
+        }
+
+        .subdomain-group input {
+            border: none;
+            outline: none;
+            padding: 12px 16px;
+            flex: 1;
+            font-size: 16px;
+        }
+
+        .subdomain-suffix {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .alert {
+            border-radius: 12px;
+            border: none;
+        }
+
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .terms-check {
+            margin: 20px 0;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .login-link a {
+            color: var(--chronos-orange);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .register-card {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+
+            .plan-selector {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="chronos-logo">
+                <h1><i class="fas fa-bolt"></i> CHRONOS Fin</h1>
+                <p>Seu assistente financeiro inteligente</p>
+            </div>
+
+            {% if errors %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form method="POST" action="{{ route('chronos.register') }}" id="registerForm">
+                {{ csrf_field() }}
+
+                <!-- Personal Information -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Nome completo" value="{{ old('name') }}" required>
+                            <label for="name">Nome completo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="E-mail" value="{{ old('email') }}" required>
+                            <label for="email">E-mail</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Senha" required>
+                            <label for="password">Senha (mín. 8 caracteres)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password_confirmation"
+                                   name="password_confirmation" placeholder="Confirmar senha" required>
+                            <label for="password_confirmation">Confirmar senha</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Information -->
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="company_name" name="company_name"
+                           placeholder="Nome da empresa" value="{{ old('company_name') }}" required>
+                    <label for="company_name">Nome da empresa ou pessoa</label>
+                </div>
+
+                <!-- Subdomain -->
+                <div class="mb-3">
+                    <label class="form-label">Seu endereço CHRONOS Fin</label>
+                    <div class="subdomain-group">
+                        <input type="text" name="subdomain" placeholder="minha-empresa"
+                               value="{{ old('subdomain') }}" required pattern="[a-zA-Z0-9-]+"
+                               title="Apenas letras, números e hífens">
+                        <span class="subdomain-suffix">.chronos.ia.br</span>
+                    </div>
+                </div>
+
+                <!-- Phone (optional) -->
+                <div class="form-floating">
+                    <input type="tel" class="form-control" id="phone" name="phone"
+                           placeholder="Telefone (opcional)" value="{{ old('phone') }}">
+                    <label for="phone">WhatsApp (opcional - para integração)</label>
+                </div>
+
+                <!-- Plan Selection -->
+                <div class="mb-3">
+                    <label class="form-label">Escolha seu plano</label>
+                    <div class="plan-selector">
+                        <div class="plan-option" onclick="selectPlan('basic')">
+                            <input type="radio" name="plan" value="basic" id="plan_basic" checked>
+                            <div class="plan-title">Básico</div>
+                            <div class="plan-price">Grátis</div>
+                            <div class="plan-features">30 dias trial<br>1 usuário<br>100 transações/mês</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan('pro')">
+                            <input type="radio" name="plan" value="pro" id="plan_pro">
+                            <div class="plan-title">Pro</div>
+                            <div class="plan-price">R$ 29/mês</div>
+                            <div class="plan-features">5 usuários<br>1000 transações/mês<br>Relatórios avançados</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan('enterprise')">
+                            <input type="radio" name="plan" value="enterprise" id="plan_enterprise">
+                            <div class="plan-title">Enterprise</div>
+                            <div class="plan-price">R$ 99/mês</div>
+                            <div class="plan-features">Usuários ilimitados<br>Transações ilimitadas<br>API completa</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="terms-check">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Aceito os <a href="/terms" target="_blank">termos de uso</a> e
+                            <a href="/privacy" target="_blank">política de privacidade</a>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-chronos">
+                    <i class="fas fa-rocket me-2"></i>Criar minha conta
+                </button>
+            </form>
+
+            <div class="login-link">
+                Já tem uma conta? <a href="{{ route('login') }}">Faça login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectPlan(plan) {
+            // Remove selected class from all options
+            document.querySelectorAll('.plan-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            event.currentTarget.classList.add('selected');
+
+            // Check the radio button
+            document.getElementById('plan_' + plan).checked = true;
+        }
+
+        // Initialize with basic plan selected
+        document.addEventListener('DOMContentLoaded', function() {
+            selectPlan('basic');
+        });
+
+        // Subdomain validation
+        document.querySelector('input[name="subdomain"]').addEventListener('input', function(e) {
+            let value = e.target.value.toLowerCase();
+            value = value.replace(/[^a-z0-9-]/g, '');
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

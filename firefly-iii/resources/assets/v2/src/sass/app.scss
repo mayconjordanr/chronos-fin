@@ -1,0 +1,217 @@
+/*!
+ * app.scss - CHRONOS Fin
+ * Copyright (c) 2024 CHRONOS Fin
+ *
+ * This file is part of CHRONOS Fin (based on Firefly III).
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ */
+
+// CHRONOS Fin Theme Variables
+$color-mode-type: media-query;
+$link-decoration: none !default;
+$font-family-sans-serif: "Inter", "Roboto", sans-serif;
+
+// CHRONOS Fin Color Palette
+$chronos-orange: #f54e1a !default;
+$chronos-orange-light: #ff6b3d !default;
+$chronos-orange-dark: #d13f17 !default;
+$chronos-dark: #1a1a1a !default;
+$chronos-dark-secondary: #2d2d2d !default;
+$chronos-light: #ffffff !default;
+$chronos-light-secondary: #f8f9fa !default;
+
+// Bootstrap Color Overrides
+$primary: $chronos-orange !default;
+$danger: #e74c3c !default;
+$success: #27ae60 !default;
+$warning: #f39c12 !default;
+$info: #3498db !default;
+$dark: $chronos-dark !default;
+$light: $chronos-light !default;
+
+// admin LTE with CHRONOS Fin theme
+@use "admin-lte/src/scss/adminlte" with (
+    $color-mode-type: $color-mode-type,
+    $link-decoration: $link-decoration,
+    $font-family-sans-serif: $font-family-sans-serif,
+    $danger: $danger,
+    $primary: $primary,
+    $success: $success,
+    $dark: $dark,
+    $light: $light
+);
+
+@use '@fortawesome/fontawesome-free/scss/variables' with (
+  $font-path: "@fortawesome/fontawesome-free/webfonts"
+);
+
+@use '@fortawesome/fontawesome-free/scss/fontawesome';
+@use '@fortawesome/fontawesome-free/scss/fa' as fa;
+@use '@fortawesome/fontawesome-free/scss/solid.scss' as fa-solid;
+@use '@fortawesome/fontawesome-free/scss/brands.scss' as fa-brands;
+@use '@fortawesome/fontawesome-free/scss/regular.scss' as fa-regular;
+
+
+// some local CSS
+.skip-links {display: none;}
+
+/*
+Remove bottom margin from unstyled lists
+ */
+.list-no-margin {margin-bottom: 0;}
+.list-no-margin li.list-indent {margin-left:1.6em;}
+
+.hover-footer {
+    overflow-x:hidden;
+    width:100%;
+    text-align:right;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+.hover-footer:hover {
+    overflow: auto;
+    text-overflow: unset;
+    white-space: normal;
+}
+h3.hover-expand {
+    overflow-x: hidden;
+    text-overflow: ellipsis
+}
+h3.hover-expand:hover {
+    overflow-x: auto;
+}
+
+.form-control {
+    appearance: auto;
+}
+
+// edit buttons
+.hidden-edit-button {
+    cursor: pointer;
+}
+td:not(:hover) .hidden-edit-button {
+    visibility: hidden;
+}
+
+// Bootstrap
+// @import "bootstrap/scss/bootstrap";
+
+
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// hover buttons
+
+// CHRONOS Fin Custom Styles
+.chronos-gradient {
+    background: linear-gradient(135deg, $chronos-orange, $chronos-orange-light);
+}
+
+.chronos-card {
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(245, 78, 26, 0.1);
+    border: 1px solid rgba(245, 78, 26, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 45px rgba(245, 78, 26, 0.2);
+    }
+}
+
+.chronos-btn {
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    background: linear-gradient(135deg, $chronos-orange, $chronos-orange-light);
+    color: white;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(245, 78, 26, 0.4);
+        color: white;
+    }
+}
+
+.chronos-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+}
+
+// Dark Mode Styles
+[data-bs-theme="dark"] {
+    .chronos-glass {
+        background: rgba(26, 26, 26, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card {
+        background: rgba(45, 45, 45, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+// Futuristic Chart Styles
+.chronos-chart {
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(245, 78, 26, 0.2);
+    padding: 20px;
+}
+
+// Mobile Responsive Adjustments
+@media (max-width: 768px) {
+    .chronos-card {
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+
+    .chronos-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+// Sidebar Customization
+.main-sidebar {
+    background: linear-gradient(180deg, $chronos-dark, $chronos-dark-secondary);
+
+    .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+
+        &:hover {
+            background: rgba(245, 78, 26, 0.1);
+            color: $chronos-orange;
+        }
+
+        &.active {
+            background: $chronos-orange;
+            color: white;
+        }
+    }
+}
+
+// Header Customization
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(245, 78, 26, 0.1);
+
+    [data-bs-theme="dark"] & {
+        background: rgba(26, 26, 26, 0.95);
+        border-bottom: 1px solid rgba(245, 78, 26, 0.2);
+    }
+}
+
+

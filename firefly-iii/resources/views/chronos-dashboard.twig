@@ -1,0 +1,319 @@
+{% extends "./layout/default" %}
+
+{% block breadcrumbs %}
+    {{ Breadcrumbs.render }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid px-4">
+        <!-- CHRONOS Fin Welcome Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="chronos-card chronos-gradient text-white p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="mb-2">Bem-vindo ao CHRONOS Fin</h2>
+                            <p class="mb-0 opacity-90">Seu assistente financeiro inteligente</p>
+                        </div>
+                        <div class="text-end">
+                            <button class="chronos-btn btn-light" id="theme-toggle">
+                                <i class="fas fa-moon" id="theme-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Overview Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body text-center">
+                        <div class="chronos-gradient rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-wallet text-white fa-lg"></i>
+                        </div>
+                        <h5 class="card-title">Saldo Total</h5>
+                        <h3 class="text-primary mb-0">R$ 12.450,78</h3>
+                        <small class="text-success">+5.2% este mês</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body text-center">
+                        <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-arrow-up text-white fa-lg"></i>
+                        </div>
+                        <h5 class="card-title">Receitas</h5>
+                        <h3 class="text-success mb-0">R$ 8.500,00</h3>
+                        <small class="text-muted">Este mês</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body text-center">
+                        <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-arrow-down text-white fa-lg"></i>
+                        </div>
+                        <h5 class="card-title">Despesas</h5>
+                        <h3 class="text-danger mb-0">R$ 6.320,50</h3>
+                        <small class="text-muted">Este mês</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body text-center">
+                        <div class="bg-info rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                             style="width: 60px; height: 60px;">
+                            <i class="fas fa-piggy-bank text-white fa-lg"></i>
+                        </div>
+                        <h5 class="card-title">Economia</h5>
+                        <h3 class="text-info mb-0">R$ 2.179,50</h3>
+                        <small class="text-success">+25.6% meta</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row mb-4">
+            <div class="col-lg-8 col-md-12">
+                <!-- Main Financial Chart -->
+                <div class="chronos-card chronos-chart mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-primary mb-0">
+                            <i class="fas fa-chart-line me-2"></i>Evolução Financeira
+                        </h4>
+                        <div class="btn-group">
+                            <button class="chronos-btn btn-sm active">7D</button>
+                            <button class="chronos-btn btn-sm">30D</button>
+                            <button class="chronos-btn btn-sm">3M</button>
+                            <button class="chronos-btn btn-sm">1A</button>
+                        </div>
+                    </div>
+                    <canvas id="accounts-chart" style="width:100%;height:400px;" height="400" width="100%"></canvas>
+                </div>
+
+                <!-- Budget Overview -->
+                <div class="chronos-card chronos-chart">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-primary mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>Orçamento por Categoria
+                        </h4>
+                        <a href="{{ route('budgets.index') }}" class="chronos-btn btn-sm">Ver Todos</a>
+                    </div>
+                    <canvas id="budgets-chart" style="width:100%;height:300px;" height="300" width="100%"></canvas>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <!-- Quick Actions -->
+                <div class="chronos-card chronos-glass mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <i class="fas fa-bolt me-2"></i>Ações Rápidas
+                        </h5>
+                        <div class="d-grid gap-2">
+                            <button class="chronos-btn" onclick="addTransaction('expense')">
+                                <i class="fas fa-minus-circle me-2"></i>Nova Despesa
+                            </button>
+                            <button class="chronos-btn" onclick="addTransaction('income')">
+                                <i class="fas fa-plus-circle me-2"></i>Nova Receita
+                            </button>
+                            <button class="chronos-btn" onclick="addTransaction('transfer')">
+                                <i class="fas fa-exchange-alt me-2"></i>Transferência
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Assistant Integration -->
+                <div class="chronos-card chronos-glass mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <i class="fas fa-robot me-2"></i>CHRONOS Assistant
+                        </h5>
+                        <p class="text-muted mb-3">Envie dados via WhatsApp:</p>
+                        <div class="bg-light p-3 rounded mb-3">
+                            <small class="text-muted">"Comprei um litro de leite, paguei R$ 4,90 no débito"</small>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-success me-2">Conectado</span>
+                            <small class="text-success">Última sync: há 2 min</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <i class="fas fa-history me-2"></i>Transações Recentes
+                        </h5>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <div>
+                                    <div class="fw-bold">Supermercado</div>
+                                    <small class="text-muted">Alimentação</small>
+                                </div>
+                                <span class="text-danger">-R$ 89,50</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <div>
+                                    <div class="fw-bold">Salário</div>
+                                    <small class="text-muted">Trabalho</small>
+                                </div>
+                                <span class="text-success">+R$ 5.000,00</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                <div>
+                                    <div class="fw-bold">Netflix</div>
+                                    <small class="text-muted">Entretenimento</small>
+                                </div>
+                                <span class="text-danger">-R$ 29,90</span>
+                            </div>
+                        </div>
+                        <a href="{{ route('transactions.index') }}" class="btn btn-link p-0 mt-2">Ver todas →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Goals -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="chronos-card chronos-glass">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-4">
+                            <i class="fas fa-target me-2"></i>Metas Financeiras
+                        </h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Reserva de Emergência</span>
+                                    <span class="text-primary">65%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                </div>
+                                <small class="text-muted">R$ 6.500 de R$ 10.000</small>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Viagem de Férias</span>
+                                    <span class="text-warning">40%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" style="width: 40%"></div>
+                                </div>
+                                <small class="text-muted">R$ 2.000 de R$ 5.000</small>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Carro Novo</span>
+                                    <span class="text-info">20%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-info" style="width: 20%"></div>
+                                </div>
+                                <small class="text-muted">R$ 10.000 de R$ 50.000</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" nonce="{{ JS_NONCE }}">
+        // CHRONOS Fin Configuration
+        var chronosOrange = '#f54e1a';
+        var chronosOrangeLight = '#ff6b3d';
+        var chronosDark = '#1a1a1a';
+
+        // Theme Toggle
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+            localStorage.setItem('chronos-theme', newTheme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('chronos-theme') || 'light';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Chart Configuration
+        var lineColor = chronosOrange;
+        var lineTextColor = '#000';
+        if (savedTheme === 'dark') {
+            lineTextColor = '#bec5cb';
+        }
+
+        var billCount = {{ billCount|default(0) }};
+        var accountFrontpageUrl = '{{ route('chart.account.frontpage') }}';
+        var accountRevenueUrl = '{{ route('chart.account.revenue') }}';
+        var accountExpenseUrl = '{{ route('chart.account.expense') }}';
+        var piggyInfoUrl = '{{ route('json.fp.piggy-banks') }}';
+
+        // Quick Actions
+        function addTransaction(type) {
+            const routes = {
+                'expense': '{{ route('transactions.create', ['withdrawal']) }}',
+                'income': '{{ route('transactions.create', ['deposit']) }}',
+                'transfer': '{{ route('transactions.create', ['transfer']) }}'
+            };
+            window.location.href = routes[type];
+        }
+
+        // Initialize Charts with CHRONOS theme
+        Chart.defaults.color = lineTextColor;
+        Chart.defaults.borderColor = 'rgba(245, 78, 26, 0.1)';
+    </script>
+
+    <script type="text/javascript" src="v1/js/lib/Chart.bundle.min.js?v={{ FF_VERSION }}"
+            nonce="{{ JS_NONCE }}"></script>
+    <script type="text/javascript" src="v1/js/lib/chartjs-plugin-annotation.min.js?v={{ FF_VERSION }}"
+            nonce="{{ JS_NONCE }}"></script>
+    <script type="text/javascript" src="v1/js/ff/charts.defaults.js?v={{ FF_VERSION }}"
+            nonce="{{ JS_NONCE }}"></script>
+    <script type="text/javascript" src="v1/js/ff/charts.js?v={{ FF_VERSION }}" nonce="{{ JS_NONCE }}"></script>
+    <script type="text/javascript" src="v1/js/ff/index.js?v={{ FF_VERSION }}" nonce="{{ JS_NONCE }}"></script>
+{% endblock %}
+
+{% block styles %}
+    <style nonce="{{ JS_NONCE }}">
+        .chronos-card {
+            transition: all 0.3s ease;
+        }
+
+        .chronos-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, {{ chronosOrange }}, {{ chronosOrangeLight }});
+        }
+
+        .list-group-item {
+            background: transparent !important;
+        }
+
+        .btn-group .chronos-btn.active {
+            background: #f54e1a !important;
+            color: white !important;
+        }
+    </style>
+{% endblock %}

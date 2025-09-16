@@ -1,0 +1,96 @@
+# Laravel Core
+/node_modules
+/storage/*.key
+/vendor
+public/hot
+npm-debug.log
+yarn-error.log
+.env
+.env.backup
+.env.production
+.env.local
+.env.staging
+.env.testing
+/.ci/php-cs-fixer/vendor
+coverage.xml
+output.txt
+.phpunit.result.cache
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+laravel.log
+storage/logs/*.log
+
+# Cache
+bootstrap/cache/*.php
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+
+# ignore generated files.
+public/build
+
+# ignore v1 build files
+resources/assets/v1/node_modules
+resources/assets/v1/build
+public/v1/js/app.js*
+public/v1/js/app_vue.js*
+public/v1/js/create*
+public/v1/js/edit*
+public/v1/js/profile*
+public/v1/js/administrations
+public/v1/js/exchange-rates
+public/v1/js/webhooks
+
+# ignore v2 build files
+resources/assets/v2/node_modules
+resources/assets/v2/build
+public/v2/i18n
+
+# CHRONOS Fin specific
+/storage/tenant-backups/*
+!/storage/tenant-backups/.gitkeep
+/public/uploads/*
+!/public/uploads/.gitkeep
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+
+# Uploads and user content
+/public/storage
+
+# Build tools
+/public/css
+/public/js
+/public/mix-manifest.json
+
+# Testing
+coverage/
+.phpunit.cache
+
+# Composer
+composer.phar
+
+# Database
+*.sqlite
+*.db
+
+# Certificates
+*.crt
+*.key
+*.pem
+
+# Backup files
+*.backup
+*.bak
+*.tmp

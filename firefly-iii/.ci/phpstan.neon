@@ -1,0 +1,32 @@
+parameters:
+  paths:
+    - ../app
+    - ../database
+    - ../routes
+    - ../config
+    - ../bootstrap/app.php
+  universalObjectCratesClasses:
+    - Illuminate\Database\Eloquent\Model
+  reportUnmatchedIgnoredErrors: true
+  ignoreErrors:
+    # all errors below I will never fix.
+    - '#expects view-string\|null, string given#'
+    - '#expects view-string, string given#'
+    - "#Parameter \\#[1-2] \\$num[1-2] of function bc[a-z]+ expects numeric-string, [a-z\\-|&]+ given#"
+    - identifier: missingType.generics # not interesting enough to fix.
+    -
+        identifier: larastan.noEnvCallsOutsideOfConfig
+        path: ../app/Console/Commands/System/CreatesDatabase.php
+    - identifier: missingType.iterableValue # not interesting enough to fix.
+    - identifier: varTag.type # needs a custom extension for every repository, not gonna happen.
+    - '#Dynamic call to static method Illuminate#'
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany::before#' # is custom scope
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany::after#' # is custom scope
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany::withTrashed#' # is to allow soft delete
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany::accountTypeIn#' # is a custom scope
+    - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo::withTrashed#' # is to allow soft delete
+
+  # The level 8 is the highest level. original was 5
+  # 7 is more than enough, higher just leaves NULL things.
+  level: 7
+
