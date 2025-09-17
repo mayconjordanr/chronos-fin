@@ -91,12 +91,16 @@ update_system() {
 }
 
 install_php() {
-    print_status "Instalando PHP 8.1..."
+    print_status "Instalando PHP 8.2..."
     add-apt-repository ppa:ondrej/php -y
     apt update
-    apt install -y php8.1 php8.1-fpm php8.1-mysql php8.1-xml php8.1-curl \
-        php8.1-gd php8.1-mbstring php8.1-zip php8.1-intl php8.1-bcmath \
-        php8.1-json php8.1-redis php8.1-imagick php8.1-tokenizer
+    apt install -y php8.2 php8.2-fpm php8.2-mysql php8.2-xml php8.2-curl \
+        php8.2-gd php8.2-mbstring php8.2-zip php8.2-intl php8.2-bcmath \
+        php8.2-redis php8.2-imagick php8.2-tokenizer php8.2-dom
+
+    # Configurar como padrão
+    update-alternatives --install /usr/bin/php php /usr/bin/php8.2 82
+    update-alternatives --set php /usr/bin/php8.2
 }
 
 install_mysql() {
@@ -151,7 +155,7 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
         fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
         include fastcgi_params;
         fastcgi_hide_header X-Powered-By;
@@ -227,14 +231,21 @@ setup_application() {
 
     cd "$APP_DIR"
 
-    # Instalar dependências PHP
-    sudo -u www-data composer install --no-dev --optimize-autoloader
+    # Criar diretório cache do composer
+    mkdir -p /var/www/.cache/composer
+    chown -R www-data:www-data /var/www/.cache
 
-    # Instalar dependências Node.js
-    sudo -u www-data npm install
+    # Instalar dependências PHP com fallback
+    print_status "Instalando dependências PHP..."
+    sudo -u www-data composer install --no-dev --optimize-autoloader || \
+    sudo -u www-data composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-    # Compilar assets
-    sudo -u www-data npm run build
+    # Instalar dependências Node.js se package.json existir
+    if [[ -f package.json ]]; then
+        print_status "Instalando dependências JavaScript..."
+        sudo -u www-data npm install
+        sudo -u www-data npm run build || print_warning "Build de assets falhou, continuando..."
+    fi
 
     # Configurar ambiente
     sudo -u www-data cp .env.chronos .env
@@ -315,8 +326,9 @@ setup_firewall() {
 
 restart_services() {
     print_status "Reiniciando serviços..."
+    systemctl enable nginx php8.2-fpm mysql redis-server
     systemctl restart nginx
-    systemctl restart php8.1-fpm
+    systemctl restart php8.2-fpm
     systemctl restart mysql
     systemctl restart redis-server
 }

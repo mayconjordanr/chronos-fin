@@ -1,71 +1,51 @@
 {
-    "name": "grumpydictator/firefly-iii",
-    "description": "Firefly III: a personal finances manager.",
+    "name": "mayconjordanr/chronos-fin",
+    "description": "CHRONOS Fin: Sistema de controle financeiro multi-tenant com integração WhatsApp",
     "keywords": [
         "finance",
         "finances",
         "manager",
         "management",
-        "euro",
-        "dollar",
         "laravel",
         "money",
         "currency",
-        "financials",
         "financial",
         "budgets",
-        "administration",
-        "tool",
-        "tooling",
-        "help",
-        "helper",
-        "assistant",
-        "planning",
-        "organizing",
-        "bills",
+        "chronos",
+        "whatsapp",
+        "multi-tenant",
+        "saas",
         "personal finance",
-        "budgets",
         "budgeting",
-        "budgeting tool",
-        "budgeting application",
         "transactions",
         "self hosted",
-        "self-hosted",
-        "transfers",
-        "management"
+        "api"
     ],
     "license": "AGPL-3.0-or-later",
-    "homepage": "https://github.com/firefly-iii/firefly-iii",
+    "homepage": "https://github.com/mayconjordanr/chronos-fin",
     "type": "project",
-    "readme": "readme.md",
+    "readme": "README.md",
     "authors": [
+        {
+            "name": "Maycon Jordan",
+            "email": "mayconjordanr@gmail.com",
+            "homepage": "https://github.com/mayconjordanr",
+            "role": "Developer"
+        },
         {
             "name": "James Cole",
             "email": "james@firefly-iii.org",
             "homepage": "https://github.com/firefly-iii",
-            "role": "Developer"
+            "role": "Original Firefly III Author"
         }
     ],
     "support": {
-        "email": "james@firefly-iii.org",
-        "issues": "https://github.com/firefly-iii/firefly-iii/issues",
-        "forum": "https://gitter.im/firefly-iii/firefly-iii",
-        "wiki": "https://github.com/firefly-iii/help/wiki",
-        "source": "https://github.com/firefly-iii/firefly-iii",
-        "docs": "https://docs.firefly-iii.org/"
+        "issues": "https://github.com/mayconjordanr/chronos-fin/issues",
+        "source": "https://github.com/mayconjordanr/chronos-fin",
+        "docs": "https://chronos.ia.br"
     },
-    "funding": [
-        {
-            "type": "patreon",
-            "url": "https://www.patreon.com/JC5"
-        },
-        {
-            "type": "github",
-            "url": "https://github.com/sponsors/JC5"
-        }
-    ],
     "require": {
-        "php": ">=8.4",
+        "php": ">=8.1",
         "ext-bcmath": "*",
         "ext-curl": "*",
         "ext-fileinfo": "*",
@@ -88,16 +68,16 @@
         "jc5/google2fa-laravel": "^2.0",
         "jc5/recovery": "^2",
         "laravel-notification-channels/pushover": "^4.0",
-        "laravel/framework": "^12",
-        "laravel/passport": "^12.0",
-        "laravel/sanctum": "^4.1",
+        "laravel/framework": "^10.0",
+        "laravel/passport": "^11.0",
+        "laravel/sanctum": "^3.2",
         "laravel/slack-notification-channel": "^3.3",
         "laravel/ui": "^4.2",
         "league/commonmark": "^2",
         "league/csv": "^9.10",
         "league/fractal": "0.*",
         "mailersend/laravel-driver": "^2.7",
-        "nunomaduro/collision": "^8",
+        "nunomaduro/collision": "^7.0",
         "pragmarx/google2fa": "^8.0",
         "predis/predis": "^3",
         "psr/log": "<4",
@@ -124,7 +104,7 @@
         "phpstan/phpstan": "^2",
         "phpstan/phpstan-deprecation-rules": "^2",
         "phpstan/phpstan-strict-rules": "^2",
-        "phpunit/phpunit": "^12",
+        "phpunit/phpunit": "^10.0",
         "rector/rector": "^2.0",
         "thecodingmachine/phpstan-safe-rule": "^1.4"
     },
