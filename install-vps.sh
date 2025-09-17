@@ -267,8 +267,14 @@ install_ssl() {
     print_status "Instalando certificado SSL..."
     apt install -y certbot python3-certbot-nginx
 
-    # Obter certificado SSL
-    certbot --nginx -d "$DOMAIN" -d "app.$DOMAIN" -d "*.$DOMAIN" --email "$EMAIL" --agree-tos --non-interactive
+    # Reiniciar nginx antes do SSL
+    systemctl restart nginx
+
+    # Aguardar nginx iniciar
+    sleep 5
+
+    # Obter certificado SSL (sem wildcard pois requer DNS challenge)
+    certbot --nginx -d "$DOMAIN" -d "app.$DOMAIN" --email "$EMAIL" --agree-tos --non-interactive
 
     # Configurar renovação automática
     echo "0 12 * * * /usr/bin/certbot renew --quiet" | crontab -

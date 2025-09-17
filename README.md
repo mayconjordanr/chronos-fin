@@ -37,14 +37,22 @@ O CHRONOS Fin é uma evolução do [Firefly III](https://github.com/firefly-iii/
 ### Instalação Automática
 
 ```bash
-# 1. Baixar o instalador
+# 1. Conectar na VPS (IP específico: 91.99.23.32)
+ssh root@91.99.23.32
+
+# 2. Baixar o instalador
 curl -sSL https://raw.githubusercontent.com/mayconjordanr/chronos-fin/main/install-vps.sh -o install-vps.sh
 
-# 2. Dar permissão de execução
+# 3. Dar permissão de execução
 chmod +x install-vps.sh
 
-# 3. Executar a instalação
+# 4. Executar a instalação
 sudo ./install-vps.sh
+```
+
+### ⚡ Instalação Express (Um Comando)
+```bash
+ssh root@91.99.23.32 'curl -sSL https://raw.githubusercontent.com/mayconjordanr/chronos-fin/main/install-vps.sh | bash'
 ```
 
 O script irá:
